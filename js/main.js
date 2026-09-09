@@ -6,6 +6,7 @@
 (function () {
   'use strict';
 
+<<<<<<< HEAD
   // ================= โซนผังเมือง (17 หมวด) =================
   var ZONES = [
     { id: 'res',        color: 0xffe14f, label: 'ที่อยู่อาศัย (สีเหลือง)',           floors: [3, 6] },
@@ -25,10 +26,23 @@
     { id: 'agriculture', color: 0x9db84a, label: 'เกษตร (สีเขียวเหลือง) — รอบนอก',  floors: [1, 1] },
     { id: 'tourism',    color: 0xf48fb1, label: 'การท่องเที่ยว (สีชมพู)',            floors: [3, 8] },
     { id: 'everyday',   color: 0x26c6da, label: 'ชีวิตประจำวัน (บริการ)',            floors: [2, 4] },
+=======
+  // ================= โซนผังเมือง =================
+  var ZONES = [
+    { id: 'yellow', color: 0xffe14f, label: 'ที่อยู่อาศัย (สีเหลือง)',        floors: [2, 4] },
+    { id: 'orange', color: 0xff9a3c, label: 'ที่อยู่อาศัย/ค้าขาย (สีส้ม)',    floors: [2, 3] },
+    { id: 'purple', color: 0xb45ce8, label: 'ที่อยู่อาศัย/ร้านค้า (สีม่วง)',  floors: [3, 5] },
+    { id: 'red',    color: 0xef5350, label: 'พาณิชยกรรม (สีแดง)',             floors: [4, 8] },
+    { id: 'blue',   color: 0x42a5f5, label: 'ค้าขาย/บริการ (สีน้ำเงิน)',      floors: [3, 6] },
+    { id: 'brown',  color: 0x8d6e63, label: 'ที่พักอาศัยหนาแน่น (สีน้ำตาล)',  floors: [5, 10] },
+    { id: 'green',  color: 0x66bb6a, label: 'พื้นที่สีเขียว/เกษตร (สีเขียว)', floors: [1, 1] },
+    { id: 'cyan',   color: 0x26c6da, label: 'ราชการ/สถานศึกษา (สีฟ้า)',       floors: [2, 5] },
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   ];
 
   // ก้อนโซน (x, z, กว้าง w, ลึก d) หน่วย = เมตร บนพื้น 500x500
   var ZONE_BLOCKS = [
+<<<<<<< HEAD
     { zone: 'res',         x:  170, z:  170, w: 100, d: 100 },   // ชานเมืองตะวันออกเฉียงใต้ (บ้าน)
     { zone: 'res',         x:  -45, z: -165, w:  70, d:  90 },   // คอนโด/อพาร์ตเมนต์เหนือเมือง
     { zone: 'edu',         x:   45, z: -165, w:  70, d:  90 },
@@ -82,6 +96,25 @@
   var GROUND_H = 26;       // ความหนาของชั้นดินใต้พื้นผิว (เห็นตอนกดมุมต่ำ)
   var BRIDGE_LOW = 4.5;    // ระดับสะพานข้ามทะเลสาบ (แนว x=0)
   var BRIDGE_HIGH = 12;    // ระดับสะพานยกระดับสูง (แนว z=0) ตัดต่างระดับชัดเจน
+=======
+    { zone: 'yellow', x: -175, z: -150, w: 130, d: 110 },
+    { zone: 'yellow', x: -170, z:  130, w: 120, d: 100 },
+    { zone: 'yellow', x:  150, z: -160, w: 140, d:  90 },
+    { zone: 'orange', x:   25, z: -175, w: 160, d:  70 },
+    { zone: 'purple', x:  175, z:  120, w: 120, d: 110 },
+    { zone: 'red',    x:   10, z:   10, w: 150, d: 120 },
+    { zone: 'red',    x:  185, z:  -30, w: 100, d: 100 },
+    { zone: 'blue',   x: -165, z:   10, w: 110, d: 150 },
+    { zone: 'brown',  x:  -35, z:  170, w: 140, d: 110 },
+    { zone: 'cyan',   x: -150, z:  185, w: 100, d:  90 },
+    { zone: 'green',  x:  165, z: -170, w: 110, d:  70 },
+    { zone: 'green',  x:   40, z:  185, w: 120, d:  70 },
+  ];
+
+  var GROUND_SIZE = 500;   // พื้น 500x500 หน่วย
+  var FLOOR_H = 3.2;       // ความสูงชั้นละ 3.2 ม.
+  var ROAD_W = 16;         // ความกว้างถนนหลัก
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
 
   // ================= ฉากพื้นฐาน =================
   var canvas = document.getElementById('scene');
@@ -181,6 +214,7 @@
         g.lineTo(cx + w / 2, cy - d / 2 + (d / nz) * iz);
         g.stroke();
       }
+<<<<<<< HEAD
       // เนื้อพื้นโซนจุด ๆ (ไม่ให้แบน)
       g.fillStyle = 'rgba(0,0,0,0.07)';
       for (var sp = 0; sp < 110; sp++) {
@@ -227,10 +261,26 @@
     // ถนนริมเมือง
     [[-edge, 0], [edge, 0], [0, -edge], [0, edge]].forEach(function (p) {
       g.fillStyle = '#3a3d42';
+=======
+    });
+
+    // ถนน: แนวตั้งและแนวนอน
+    g.fillStyle = '#3a3d42';
+    var roadW = ROAD_W * px;
+    var roads = [-90, 0, 90]; // ตำแหน่งกึ่งกลางถนน (เมตร)
+    roads.forEach(function (pos) {
+      g.fillRect((pos + GROUND_SIZE / 2) * px - roadW / 2, 0, roadW, S); // แนวตั้ง
+      g.fillRect(0, (pos + GROUND_SIZE / 2) * px - roadW / 2, S, roadW); // แนวนอน
+    });
+    // ถนนริม
+    var edge = GROUND_SIZE / 2 - 20;
+    [[-edge, 0], [edge, 0], [0, -edge], [0, edge]].forEach(function (p) {
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
       g.fillRect((p[0] + GROUND_SIZE / 2) * px - roadW / 2, 0, roadW, S);
       g.fillRect(0, (p[1] + GROUND_SIZE / 2) * px - roadW / 2, S, roadW);
     });
 
+<<<<<<< HEAD
     // เส้นแบ่งเลน + เส้นขอบถนน
     roads.forEach(function (pos) {
       var c = (pos + GROUND_SIZE / 2) * px;
@@ -244,6 +294,16 @@
       g.fillRect(c + roadW / 2 - 2, 0, 2, S);
       g.fillRect(0, c - roadW / 2, S, 2);
       g.fillRect(0, c + roadW / 2 - 2, S, 2);
+=======
+    // เส้นแบ่งเลนสีขาวประ
+    g.fillStyle = 'rgba(255,255,255,0.75)';
+    roads.forEach(function (pos) {
+      var c = (pos + GROUND_SIZE / 2) * px;
+      for (var y = 0; y < S; y += 60) {
+        g.fillRect(c - 3, y, 6, 30);                 // แนวตั้ง
+        g.fillRect(y, c - 3, 30, 6);                 // แนวนอน
+      }
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     });
 
     // ทะเลสาบกลางเมือง
@@ -257,6 +317,7 @@
     g.strokeStyle = '#d9c98a';
     g.lineWidth = 6;
     g.stroke();
+<<<<<<< HEAD
     // ลูกคลื่นในน้ำ
     g.strokeStyle = 'rgba(255,255,255,0.13)';
     g.lineWidth = 2;
@@ -294,6 +355,16 @@
     g.lineWidth = 5;
     g.beginPath();
     g.arc((parkCX + GROUND_SIZE / 2) * px, (parkCZ + GROUND_SIZE / 2) * px, parkR * px, 0, Math.PI * 2);
+=======
+
+    // สวนสาธารณะ
+    g.fillStyle = '#4e7a3a';
+    g.beginPath();
+    g.arc((110 + GROUND_SIZE / 2) * px, (60 + GROUND_SIZE / 2) * px, 45 * px, 0, Math.PI * 2);
+    g.fill();
+    g.strokeStyle = '#e8f0d8';
+    g.lineWidth = 5;
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     g.stroke();
 
     var tex = new THREE.CanvasTexture(cv);
@@ -309,6 +380,7 @@
   groundMesh.receiveShadow = true;
   scene.add(groundMesh);
 
+<<<<<<< HEAD
   // ---------- ฐานพื้นดินหนา แสดงชั้นดินตัดขวาง ----------
   function makeSoilTexture() {
     var cv = document.createElement('canvas');
@@ -364,10 +436,13 @@
   groundBase.receiveShadow = true;
   scene.add(groundBase);
 
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   // ================= อาคาร =================
   var buildingsGroup = new THREE.Group();
   scene.add(buildingsGroup);
 
+<<<<<<< HEAD
   // กลุ่มแลนด์มาร์ก (อาคารจำลองรายแบบ) + กลุ่มคมนาคม (สะพาน/ไฟจราจร)
   var landmarksGroup = new THREE.Group();
   scene.add(landmarksGroup);
@@ -379,6 +454,8 @@
   var curbGroup = new THREE.Group();
   scene.add(curbGroup);
 
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   var zoneMeshes = [];
   var windowMats = [];   // วัสดุหน้าต่าง (ไฟดวงคืน)
   var windowTexCache = {};
@@ -424,7 +501,10 @@
     var wallColor = new THREE.Color(zone.color).lerp(new THREE.Color(0xdddddd), 0.55);
     var bodyMat = new THREE.MeshStandardMaterial({
       color: wallColor,
+<<<<<<< HEAD
       map: City.wallTex || null,
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
       roughness: 0.75,
       metalness: 0.05,
     });
@@ -456,7 +536,11 @@
     // ดาดฟ้า
     var roof = new THREE.Mesh(
       new THREE.BoxGeometry(w * 0.92, 0.6, d * 0.92),
+<<<<<<< HEAD
       new THREE.MeshStandardMaterial({ color: 0x555a60, map: City.wallTex || null, roughness: 0.9 })
+=======
+      new THREE.MeshStandardMaterial({ color: 0x555a60, roughness: 0.9 })
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     );
     roof.position.y = bh + 0.3;
     roof.castShadow = true;
@@ -482,6 +566,7 @@
     return group;
   }
 
+<<<<<<< HEAD
   function zoneById(id) {
     for (var i = 0; i < ZONES.length; i++) if (ZONES[i].id === id) return ZONES[i];
     return null;
@@ -651,11 +736,36 @@
       put('crosswalk', cx, cz + 9.2, 0);
       put('crosswalk', cx - 9.2, cz, Math.PI / 2);
       put('crosswalk', cx + 9.2, cz, Math.PI / 2);
+=======
+  function buildCity() {
+    ZONE_BLOCKS.forEach(function (block, bi) {
+      var zone = null;
+      for (var i = 0; i < ZONES.length; i++) {
+        if (ZONES[i].id === block.zone) zone = ZONES[i];
+      }
+      var rand = seededRandom(bi * 7 + 13);
+      var count = 4 + Math.floor(rand() * 5);
+
+      for (var j = 0; j < count; j++) {
+        var bw = 10 + rand() * (block.w / 3.5);
+        var bd = 10 + rand() * (block.d / 3.5);
+        var floors = Math.round(zone.floors[0] + rand() * (zone.floors[1] - zone.floors[0]));
+
+        var ox = (rand() - 0.5) * (block.w - bw);
+        var oz = (rand() - 0.5) * (block.d - bd);
+        makeBuilding(block.x + ox, block.z + oz, bw, bd, floors, zone);
+      }
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     });
   }
   buildCity();
 
   // ================= ต้นไม้ =================
+<<<<<<< HEAD
+=======
+  var treesGroup = new THREE.Group();
+  scene.add(treesGroup);
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
 
   function makeTree(x, z, scale) {
     var g = new THREE.Group();
@@ -685,6 +795,7 @@
 
   function plantTrees() {
     var rand = seededRandom(999);
+<<<<<<< HEAD
     function inLake(x, z) {
       var nx = x / 55, nz = z / 38;
       return nx * nx + nz * nz < 1;
@@ -719,16 +830,30 @@
       var lz = Math.sin(a2) * rr2 * 1.15;
       if (badSpot(lx, lz)) continue;
       makeTree(lx, lz, 0.7 + rand() * 0.5);
+=======
+    // ต้นไม้ในสวนสาธารณะ (110, 60)
+    for (var i = 0; i < 26; i++) {
+      var a = rand() * Math.PI * 2;
+      var rr = rand() * 40;
+      makeTree(110 + Math.cos(a) * rr, 60 + Math.sin(a) * rr * 0.7, 0.8 + rand() * 0.6);
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     }
     // ริมถนน
     var roads = [-90, 0, 90];
     roads.forEach(function (pos) {
       for (var t = -230; t <= 230; t += 24) {
         if (Math.abs(t) < 30 && pos === 0) continue; // เว้นแยกกลาง
+<<<<<<< HEAD
         [[pos + 12, t], [t, pos + 12], [pos - 12, t], [t, pos - 12]].forEach(function (p) {
           if (badSpot(p[0], p[1])) return;
           makeTree(p[0], p[1], 0.7 + rand() * 0.4);
         });
+=======
+        makeTree(pos + 12, t, 0.7 + rand() * 0.4);
+        makeTree(t, pos + 12, 0.7 + rand() * 0.4);
+        makeTree(pos - 12, t, 0.7 + rand() * 0.4);
+        makeTree(t, pos - 12, 0.7 + rand() * 0.4);
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
       }
     });
   }
@@ -792,7 +917,11 @@
     grp.add(headL, headR);
 
     carsGroup.add(grp);
+<<<<<<< HEAD
     return { grp: grp, axis: axis, lane: laneOffset, dir: dir, speed: speed, pos: start, lake: Math.abs(laneOffset) < 8 };
+=======
+    return { grp: grp, axis: axis, lane: laneOffset, dir: dir, speed: speed, pos: start };
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   }
 
   var cars = [];
@@ -814,6 +943,7 @@
       if (c.pos < -240) c.pos = 240;
       if (c.axis === 'x') c.grp.position.set(c.pos, 0, c.lane);
       else c.grp.position.set(c.lane, 0, c.pos);
+<<<<<<< HEAD
       // รถบนถนนกลางเมืองขึ้น-ลงสะพานยกระดับข้ามทะเลสาบ:
       // รถบนถนน z=0 วิ่งตามแกน x → ข้ามสะพานสูง (BRIDGE_HIGH)
       // รถบนถนน x=0 วิ่งตามแกน z → ข้ามสะพานเตี้ย (BRIDGE_LOW)
@@ -825,6 +955,8 @@
         var surface = a <= 41 ? D : (a >= e ? 0 : D * (e - a) / rampLen);
         c.grp.position.y = surface - 0.15;
       }
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
       // หมุนให้หัวรถไปทางทิศทางวิ่ง
       var yaw = (c.axis === 'x' ? 0 : Math.PI / 2) + (c.dir > 0 ? 0 : Math.PI);
       c.grp.rotation.y = yaw;
@@ -916,17 +1048,23 @@
       zoneMeshes.forEach(function (mesh) {
         if (mesh.userData.zone.id === z.id) mesh.visible = !dim;
       });
+<<<<<<< HEAD
       landmarkMeshes.forEach(function (m) {
         if (m.userData.zoneId === z.id) m.visible = !dim;
       });
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     });
   });
 
   // ================= UI: toggles =================
   document.getElementById('showBuildings').addEventListener('change', function (e) {
     buildingsGroup.visible = e.target.checked;
+<<<<<<< HEAD
     landmarksGroup.visible = e.target.checked;
     transportGroup.visible = e.target.checked;
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   });
 
   var zoneColors = new Map();
@@ -953,7 +1091,11 @@
   var VIEWS = {
     top:    { pos: [0, 420, 0.01], target: [0, 0, 0] },
     iso:    { pos: [280, 240, 280], target: [0, 0, 0] },
+<<<<<<< HEAD
     street: { pos: [0, 16, 215], target: [0, 4, 0] },   // มุมต่ำ เห็นชั้นดินตัดขวาง
+=======
+    street: { pos: [0, 10, 200], target: [0, 8, 0] },
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   };
 
   document.querySelectorAll('#viewPresets button').forEach(function (btn) {
@@ -970,12 +1112,16 @@
   var pointer = new THREE.Vector2();
   var tooltip = document.getElementById('tooltip');
 
+<<<<<<< HEAD
   var pickables = zoneMeshes.concat(landmarkMeshes);
 
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   canvas.addEventListener('pointerdown', function (e) {
     pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
+<<<<<<< HEAD
     var hits = raycaster.intersectObjects(pickables, false);
     var hit = null;
     for (var i = 0; i < hits.length; i++) {
@@ -994,6 +1140,15 @@
           'ความสูง: ' + ud.floors + ' ชั้น (~' + Math.round(ud.floors * FLOOR_H) + ' ม.)<br/>' +
           '<small>คลิกอาคารอื่นเพื่อดูข้อมูล</small>';
       }
+=======
+    var hits = raycaster.intersectObjects(zoneMeshes, false);
+    if (hits.length > 0) {
+      var ud = hits[0].object.userData;
+      tooltip.innerHTML =
+        '<b>' + ud.zone.label + '</b><br/>' +
+        'ความสูง: ' + ud.floors + ' ชั้น (~' + Math.round(ud.floors * FLOOR_H) + ' ม.)<br/>' +
+        '<small>คลิกอาคารอื่นเพื่อดูข้อมูล</small>';
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
       tooltip.classList.remove('hidden');
       clearTimeout(tooltip._t);
       tooltip._t = setTimeout(function () { tooltip.classList.add('hidden'); }, 4000);

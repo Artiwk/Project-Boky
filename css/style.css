@@ -112,6 +112,7 @@ input[type="checkbox"] {
 }
 
 /* ---------- Legend ---------- */
+<<<<<<< HEAD
 #legendList {
   list-style: none;
   max-height: calc(100vh - 170px);
@@ -120,6 +121,9 @@ input[type="checkbox"] {
 }
 #legendList::-webkit-scrollbar { width: 6px; }
 #legendList::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 3px; }
+=======
+#legendList { list-style: none; }
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
 #legendList li {
   display: flex;
   align-items: center;

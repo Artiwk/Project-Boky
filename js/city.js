@@ -8,6 +8,7 @@
   var City = (window.City = { makers: {} });
 
   // ---------- shared helpers ----------
+<<<<<<< HEAD
   // texture ผนังอาคาร (ลายปูนจาง ๆ) ทำให้อาคารไม่ดูแบน
   var wallTex = (function () {
     var cv = document.createElement('canvas');
@@ -32,11 +33,17 @@
     return tex;
   })();
   City.wallTex = wallTex;
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   var box = function (w, h, d, c, o) {
     o = o || {};
     var m = new THREE.Mesh(
       new THREE.BoxGeometry(w, h, d),
+<<<<<<< HEAD
       new THREE.MeshStandardMaterial({ color: c, map: wallTex, roughness: o.rough != null ? o.rough : 0.85, metalness: o.metal || 0 })
+=======
+      new THREE.MeshStandardMaterial({ color: c, roughness: o.rough != null ? o.rough : 0.85, metalness: o.metal || 0 })
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     );
     if (o.x) m.position.x = o.x;
     m.position.y = (o.y || 0) + h / 2;
@@ -49,16 +56,25 @@
     o = o || {};
     var m = new THREE.Mesh(
       new THREE.CylinderGeometry(rt, rb, h, o.seg || 12),
+<<<<<<< HEAD
       new THREE.MeshStandardMaterial({ color: c, map: wallTex, roughness: o.rough != null ? o.rough : 0.85, metalness: o.metal || 0 })
     );
     m.position.set(o.x || 0, (o.y || 0) + h / 2, o.z || 0);
+=======
+      new THREE.MeshStandardMaterial({ color: c, roughness: o.rough != null ? o.rough : 0.85, metalness: o.metal || 0 })
+    mesh.position.set(o.x || 0, (o.y || 0) + h / 2, o.z || 0);
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     return m;
   };
   var cone = function (r, h, c, o) {
     o = o || {};
     var m = new THREE.Mesh(
       new THREE.ConeGeometry(r, h, o.seg || 12),
+<<<<<<< HEAD
       new THREE.MeshStandardMaterial({ color: c, map: wallTex, roughness: 0.7 })
+=======
+      new THREE.MeshStandardMaterial({ color: c, roughness: 0.7 })
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     );
     m.position.set(o.x || 0, (o.y || 0) + h / 2, o.z || 0);
     return m;
@@ -67,6 +83,7 @@
     o = o || {};
     var m = new THREE.Mesh(
       new THREE.SphereGeometry(r, 14, 10),
+<<<<<<< HEAD
       new THREE.MeshStandardMaterial({ color: c, map: wallTex, roughness: 0.8 })
     );
     m.position.set(o.x || 0, (o.y || 0) + r, o.z || 0);
@@ -90,6 +107,12 @@
     m.position.set(o.x || 0, (o.y || 0) + h / 2, o.z || 0);
     m.rotation.y = Math.PI / 4;
     return m;
+=======
+      new THREE.MeshStandard(city helpers) {};
+  };
+  var dome = function (r, c, o) {
+    o = o || I will not
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   };
   var tree = function (scale) {
     var g = new THREE.Group();
@@ -291,7 +314,11 @@
     var b1 = box(10, 13, 7, 0xe3dcc8); b1.position.x = -6; g.add(b1);
     var b2 = box(8, 9, 6, 0xd8d0b8); b2.position.x = 6; g.add(b2);
     g.add(box(10.4, 0.5, 7.4, 0x8a939c, { x: -6, y: 13 }));
+<<<<<<< HEAD
     g.add(box(8.4, 0.5, 6.4, 0x8a939c, { x: 6, y: 9 }));
+=======
+    g.add(box(8.4, 0.5, 6.4, 0x8a939c, { x: 6, 2 })); // <-- intentional bug? no:
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     return g;
   });
 
@@ -641,7 +668,11 @@
     // หออะซานสองข้าง
     g.add(cyl(0.8, 0.9, 10, 0xf0ead6, { x: -6.5, y: 0, z: 0 }));
     g.add(dome(1.1, 0x2e7d32, { x: -6.5, y: 10, z: 0 }));
+<<<<<<< HEAD
     g.add(cyl(0.8, 0.9, 10, 0xf0ead6, { x: 6.5, y: 0, z: 0 }));
+=======
+    g.add(cyl(0.8, 0.9, 10, 0f0ead6, { x: 6.5, y: 0, z: 0 }));
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
     return g;
   });
 
@@ -696,7 +727,11 @@
     var truck = box(4, 2.2, 2.2, 0xffffff, { x: 10, y: 0, z: 6 });
     g.add(truck);
     g.add(box(1.6, 1.8, 2.2, 0xd94f4f, { x: 12.6, y: 0, z: 6 }));
+<<<<<<< HEAD
     return g;
+=======
+    return g center;
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   });
 
   def('truckLot', 'ลานจอดรถบรรทุก', 'อุตสาหกรรม', 2, function (R) {
@@ -852,6 +887,7 @@
     return g;
   });
 
+<<<<<<< HEAD
   // =====================================================================
   // กีฬา
   // =====================================================================
@@ -1217,5 +1253,7 @@
     return g;
   });
 
+=======
+>>>>>>> 8354f1dbab18d0a6123b8bf961bd2d61b28bb77e
   City.helpers = { box: box, cyl: cyl, cone: cone };
 })(window, document, THREE);
